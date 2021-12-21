@@ -11,9 +11,10 @@ while(1):
     jsonData = XmlManipulator.changeFieldValue(jsonData, config.FIELDNAMES, config.SEPARATORS, config.INDIES)
     df = XmlManipulator.jsonToDataFrame(jsonData)
 
-    for c,i in enumerate(df['resimler.resim']):
-        df['resimler.resim'][c] = str(i)
-
+    if config.ROWTOSTR:
+        for j in df.columns:
+            for c,i in enumerate(df[j]):
+                df[j][c] = str(i)
     if config.SAVEASTXT:
         XmlManipulator.saveTxt(jsonData)
     if config.SAVEASSQL:

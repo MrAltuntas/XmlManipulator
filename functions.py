@@ -3,7 +3,7 @@ import xmltodict, json
 import pyodbc
 import pandas as pd
 import sqlalchemy
-
+import config
 
 class XmlManipulator():
     def __init__(self, url, outerField):
@@ -17,17 +17,17 @@ class XmlManipulator():
         
         try:
             self.obj = xmltodict.parse(response_API.text)
-        except:
-            raise Exception("Xml to json parse error")
+        except Exception as e:
+            raise Exception("Xml to json parse error "+ str(e))
 
         try: 
             for i in self.outerField:
                 self.obj = self.obj[i]
-        except:
-            raise Exception("Outer field error you may didnt give the outerfield by order plss check")
+        except Exception as e:
+            raise Exception("Outer field error you may didnt give the outerfield by order plss check "+ str(e))
 
 
-        database_con = f'mssql+pyodbc://@MUSTAFA/kayzertest?driver=ODBC+Driver+13+for+SQL+Server'
+        database_con = config.CONNECTIONSTRING
         self.engine = sqlalchemy.create_engine(database_con)
 
 
@@ -72,5 +72,5 @@ class XmlManipulator():
         try:
             df.to_sql(tableName,self.engine, if_exists="replace", method=None, chunksize=20)
         except:
-            print('jsonToDataFrame error: '+ str(e))
+            print('savesql error: '+ str(e))
        
