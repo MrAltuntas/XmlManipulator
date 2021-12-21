@@ -7,8 +7,14 @@ INDIES = ["last"] # Options firstAndLast, first, last. Default first.
 
 TIME = 60 #in second
 SAVEASTXT = True
-SAVEASSQL = True
+TXTNAME = "data.json"
 ROWTOSTR = True
-
+SAVEASSQL = True
 TABLENAME = 'kayzertest'
+
+CREATERELATEDTABLE = True
+RELATEDTABLENAME = "Variants"
+RELATEDFIELDNAME = "Varyantlar"
+RELATEDOUTERFIELDS = ["Varyant"]
+
 CONNECTIONSTRING=f'mssql+pyodbc://@MUSTAFA/kayzertest?driver=ODBC+Driver+13+for+SQL+Server'

@@ -54,9 +54,9 @@ class XmlManipulator():
         except Exception as e:
             print('changeFiedValue error: '+ str(e))
 
-    def saveTxt(self, jsonData):
+    def saveTxt(self, jsonData, fileName):
         try:
-            with open('data.json', 'w') as f:
+            with open(fileName, 'w') as f:
                 json.dump(jsonData, f)
         except Exception as e:
             print('saveTxt error: '+ str(e))
