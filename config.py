@@ -1,0 +1,9 @@
+URL = 'https://kayderoutdoor.sentos.com.tr/xml-out/1_kayzeroutdoor-com'
+OUTERFIELDS = ["Urunler","Urun"]
+FIELDNAMES = ["kategori_ismi"]
+SEPARATORS = [">"]
+INDIES = ["last"] # Options firstAndLast, first, last. Default first.
+TIME = 60 #in second
+SAVEASTXT = True
+SAVEASSQL = True
+TABLENAME = 'kayzertest'
