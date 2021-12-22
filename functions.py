@@ -4,6 +4,7 @@ import pyodbc
 import pandas as pd
 import sqlalchemy
 import config
+import re 
 
 class XmlManipulator():
     def __init__(self, url, outerField):
@@ -54,6 +55,14 @@ class XmlManipulator():
         except Exception as e:
             print('changeFiedValue error: '+ str(e))
 
+    def guaranteed_list(self,x):
+        if not x:
+            return []
+        elif isinstance(x, list):
+            return x
+        else:
+            return [x]
+
     def createTable(self, jsonData):
         for relatedFieldCounter,relatedField in enumerate(config.RELATEDFIELDNAME):
             #exec(df+"_"+relatedField+" = pd.DataFrame()")
@@ -65,8 +74,7 @@ class XmlManipulator():
                     for x in config.RELATEDOUTERFIELDS[relatedFieldCounter]:
                         temp_json = temp_json[x]
 
-                    temp_df = self.jsonToDataFrame(temp_json)
-
+                    temp_df = self.jsonToDataFrame(self.guaranteed_list(temp_json))
                     temp_df["uid"] = i["id"]
 
                     #exec(df+"_"+relatedField+"") = exec(df+"_"+relatedField).append(temp_df, ignore_index=True)
@@ -91,9 +99,25 @@ class XmlManipulator():
     def jsonToDataFrame(self,jsonData):
         try:
             df = pd.json_normalize(jsonData)
+            
             return df
         except Exception as e:
             print('jsonToDataFrame error: '+ str(e))
+
+    def cleanSeo(self, data):
+        try:
+            data = data.lower()
+            data = data.replace(" ", "-")
+            data = data.replace("ı", "i")
+            data = data.replace("ş", "s")
+            data = data.replace("ö", "o")
+            data = data.replace("ü", "u")
+            data = data.replace("ğ", "g")
+            data = data.replace("ç", "c")
+            data = re.sub('[^A-Za-z0-9-]+', '', data)
+            return data
+        except Exception as e:
+            print('clean seo error: '+ str(e))
 
     def saveSql(self, df, tableName):
         try:

@@ -11,6 +11,7 @@ TXTNAME = "data.json"
 ROWTOSTR = True
 SAVEASSQL = True
 TABLENAME = 'kayzertest'
+SEOCOL = True
 
 CREATERELATEDTABLE = True
 RELATEDFIELDNAME = ["Varyantlar"]

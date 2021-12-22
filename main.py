@@ -22,6 +22,9 @@ while(1):
                 df[j][c] = str(i)
     if config.SAVEASTXT:
         XmlManipulator.saveTxt(jsonData, config.TXTNAME)
+
+    if config.SEOCOL:
+        df['seo'] = df.apply(lambda row: str(XmlManipulator.cleanSeo(row.urunismi))+"-"+str(row.id), axis=1)
     if config.SAVEASSQL:
         XmlManipulator.saveSql(df, config.TABLENAME)
 
