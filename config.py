@@ -13,8 +13,8 @@ SAVEASSQL = True
 TABLENAME = 'kayzertest'
 
 CREATERELATEDTABLE = True
-RELATEDTABLENAME = "Variants"
-RELATEDFIELDNAME = "Varyantlar"
-RELATEDOUTERFIELDS = ["Varyant"]
+RELATEDFIELDNAME = ["Varyantlar"]
+RELATEDOUTERFIELDS = [["Varyant"]]
+RELATEDTABLENAME = ["Variants"]
 
 CONNECTIONSTRING=f'mssql+pyodbc://@MUSTAFA/kayzertest?driver=ODBC+Driver+13+for+SQL+Server'

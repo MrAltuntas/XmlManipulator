@@ -54,6 +54,33 @@ class XmlManipulator():
         except Exception as e:
             print('changeFiedValue error: '+ str(e))
 
+    def createTable(self, jsonData):
+        for relatedFieldCounter,relatedField in enumerate(config.RELATEDFIELDNAME):
+            #exec(df+"_"+relatedField+" = pd.DataFrame()")
+            exec(f'df_{relatedField} = pd.DataFrame()')
+
+            for c,i in enumerate(jsonData):
+                if relatedField in i:
+                    temp_json = i[relatedField]
+                    for x in config.RELATEDOUTERFIELDS[relatedFieldCounter]:
+                        temp_json = temp_json[x]
+
+                    temp_df = self.jsonToDataFrame(temp_json)
+
+                    temp_df["uid"] = i["id"]
+
+                    #exec(df+"_"+relatedField+"") = exec(df+"_"+relatedField).append(temp_df, ignore_index=True)
+                    exec(f'df_{relatedField} = df_{relatedField}.append(temp_df, ignore_index=True)')
+
+                    del jsonData[c][relatedField]   
+
+            if config.SAVEASSQL:
+                #self.saveSql(exec(df+"_"+relatedField), config.RELATEDTABLENAME[relatedFieldCounter])
+                exec(f'self.saveSql(df_{relatedField}, config.RELATEDTABLENAME[{relatedFieldCounter}])')
+
+            #print(exec(df+"_"+relatedField))
+            exec(f'print(df_{relatedField}.head(10))')
+
     def saveTxt(self, jsonData, fileName):
         try:
             with open(fileName, 'w') as f:
