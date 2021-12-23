@@ -28,6 +28,11 @@ while(1):
     if config.SAVEASSQL:
         XmlManipulator.saveSql(df, config.TABLENAME)
 
+    if config.EXTRATABLE:
+        extra_df = XmlManipulator.extraTable(df)
+        XmlManipulator.saveSql(extra_df, config.EXTRATABLENAME)
+
+
     print(df.head(10))
     print("#############################################################################################################################")
 

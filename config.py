@@ -10,7 +10,7 @@ SAVEASTXT = True
 TXTNAME = "data.json"
 ROWTOSTR = True
 SAVEASSQL = True
-TABLENAME = 'kayzertest'
+TABLENAME = 'Products'
 SEOCOL = True
 
 CREATERELATEDTABLE = True
@@ -18,4 +18,7 @@ RELATEDFIELDNAME = ["Varyantlar"]
 RELATEDOUTERFIELDS = [["Varyant"]]
 RELATEDTABLENAME = ["Variants"]
 
-CONNECTIONSTRING=f'mssql+pyodbc://@MUSTAFA/kayzertest?driver=ODBC+Driver+13+for+SQL+Server'
+EXTRATABLE = False
+EXTRATABLENAME = "SubCategory"
+
+CONNECTIONSTRING=f'mssql+pyodbc://@MUSTAFA/KayzrOutdrDTBS2021?driver=ODBC+Driver+13+for+SQL+Server'

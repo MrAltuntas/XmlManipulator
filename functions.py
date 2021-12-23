@@ -119,6 +119,16 @@ class XmlManipulator():
         except Exception as e:
             print('clean seo error: '+ str(e))
 
+    def extraTable(self, df):
+        try:
+            extra_df = pd.DataFrame()
+            extra_df = df[['kategori_ismi', 'kategori_id']]
+            extra_df = extra_df.drop_duplicates()
+            extra_df = extra_df.reset_index(drop=True)
+            return extra_df
+        except:
+            print('extraTable error: '+ str(e))
+
     def saveSql(self, df, tableName):
         try:
             df.to_sql(tableName,self.engine, if_exists="replace", method=None, chunksize=20)
