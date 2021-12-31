@@ -30,6 +30,7 @@ while(1):
 
     if config.EXTRATABLE:
         extra_df = XmlManipulator.extraTable(df)
+        extra_df['seo'] = extra_df.apply(lambda row: str(XmlManipulator.cleanSeo(row.kategori_ismi)), axis=1)
         XmlManipulator.saveSql(extra_df, config.EXTRATABLENAME)
 
 

@@ -18,7 +18,7 @@ RELATEDFIELDNAME = ["Varyantlar"]
 RELATEDOUTERFIELDS = [["Varyant"]]
 RELATEDTABLENAME = ["Variants"]
 
-EXTRATABLE = False
+EXTRATABLE = True
 EXTRATABLENAME = "SubCategory"
 
 CONNECTIONSTRING=f'mssql+pyodbc://@MUSTAFA/KayzrOutdrDTBS2021?driver=ODBC+Driver+13+for+SQL+Server'
